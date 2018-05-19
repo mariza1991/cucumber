@@ -12,16 +12,18 @@ public class WebdriverManager {
 
     private static WebDriver driver;
 
-    public static WebDriver getDriver(){
-        if (driver == null) {
-            String browser = "chrome";
-            switch (browser) {
+    private static final String PATH_TO_PROPERTIES = "properties/settings.properties";
+
+    public static WebDriver getDriver() {
+        String browserName =
+                PropertyReader.getPropertyFromFile(PATH_TO_PROPERTIES, "browser");
+            switch (browserName) {
                 case "chrome":
                     driver = new ChromeDriver();
                     break;
                 case "chrome-remote":
                     try {
-                        driver = new RemoteWebDriver(new URL("http://192.168.0.3:4444/wd/hub"), //my hub address
+                        driver = new RemoteWebDriver(new URL("http://192.168.0.2:4444/wd/hub"), //my hub address
                                 DesiredCapabilities.chrome());
                         driver.manage().window().maximize();
                     } catch (MalformedURLException e) {
@@ -32,7 +34,6 @@ public class WebdriverManager {
                     driver = new ChromeDriver();
                     break;
             }
-        }
         return driver;
     }
 }

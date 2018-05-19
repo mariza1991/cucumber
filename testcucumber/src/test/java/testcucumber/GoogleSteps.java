@@ -27,6 +27,7 @@ public class GoogleSteps {
     @Given("^I am on the Google Search page$")
     public void i_am_on_the_google_search_page(){
     //    WebDriverManager.chromedriver().setup();
+        System.setProperty("webdriver.chrome.driver", "lib/chrome/chromedriver.exe");
         driver = getDriver();
         driver.get("https://google.com");
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
